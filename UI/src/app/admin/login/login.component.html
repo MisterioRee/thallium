@@ -1,25 +1,28 @@
 <br>
 <div class="d-flex justify-content-center flex-wrap">
-    <form style="width: 300px;" class="form-signin ">
+    <form style="width: 300px;" class="form-signin" #loginForm="ngForm">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="">
+        <input type="email" id="inputEmail" [(ngModel)]="username" name="email" class="form-control"
+            placeholder="Email address" required="" autofocus="">
         <br>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+        <input type="password" id="inputPassword" [(ngModel)]="password" name="password" class="form-control"
+            placeholder="Password" required="">
         <div class="mb-3">
             <label for="register">
                 Don't Have Account?
             </label>
-            <a [routerLink]="['/register']"  id="resiter" name="register"> Register</a>
+            <a [routerLink]="['/register']" id="resiter" name="register"> Register</a>
         </div>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.form.valid" (click)="onLogin()"
+            type="submit">Sign in</button>
+        <div *ngIf="errorMessage">
+            <p style="color:red">{{errorMessage}}</p>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/home']" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">© Brand</p>
+
+
     </form>
 
 

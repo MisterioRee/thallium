@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { FormsModule } from '@angular/forms'; 
+
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { LoginComponent } from './admin/login/login.component';
 import { RegisterComponent } from './admin/register/register.component';
+import { NavComponent } from './admin/nav/nav.component';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 
 const appRoutes: Routes = [
@@ -26,7 +30,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     NotFoundPageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,10 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -51,13 +52,13 @@ exports.login = (req, res, next) => {
         .then((user) => {
             if (user.length < 1) {
                 return res.status(401).json({
-                    message: "Auth Faild"
+                    message: "Incorrect Username OR Password"
                 });
             } else {
                 bcrypt.compare(req.body.password, user[0].password, (err, result) => {
                     if (err) {
                         return res.status(401).json({
-                            message: 'Auth Faild'
+                            message: 'Incorrect Username OR Password'
                         });
                     }
                     if (result) {
@@ -72,12 +73,13 @@ exports.login = (req, res, next) => {
 
                         );
                         return res.status(200).json({
+                            status:200,
                             message: "Auth Successfull",
                             tocken: tocken
                         });
                     }
                     return res.status(401).json({
-                        message: "Auth Faild"
+                        message: "Incorrect Username OR Password"
                     });
                 })
             }

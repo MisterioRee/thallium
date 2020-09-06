@@ -24,7 +24,7 @@
             <a [routerLink]="['/login']" id="resiter" name="register"> login</a>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" [disabled]="!regForm.form.valid &&isBusy" type="button"
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="!regForm.form.valid || isBusy" type="button"
             (click)="onRegister()">Register</button>
         <p class="mt-5 mb-3 text-muted">© Brand</p>
 
