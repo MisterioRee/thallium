@@ -1,0 +1,38 @@
+<br>
+<div class="d-flex justify-content-center flex-wrap">
+    <form style="width: 300px;" class="form-signin" #regForm="ngForm" autocomplete="off">
+        <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+        <label for="name" class="sr-only">Name</label>
+        <input type="text" id="name" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Full Name"
+            required="" autofocus="0">
+        <br>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" [(ngModel)]="user.email" id="inputEmail" name="email" class="form-control"
+            placeholder="Email address" required="" autofocus="1">
+        <br>
+        <label for="address" class="sr-only">Address</label>
+        <input type="text" [(ngModel)]="user.address" id="address" name="address" class="form-control"
+            placeholder="Address" autofocus="2">
+        <br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" [(ngModel)]="user.password" id="inputPassword" name="password" class="form-control"
+            placeholder="Password" required="" autofocus="3">
+        <div class="mb-3">
+            <label for="register">
+                Already Have Account?
+            </label>
+            <a [routerLink]="['/login']" id="resiter" name="register"> login</a>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="!regForm.form.valid &&isBusy" type="button"
+            (click)="onRegister()">Register</button>
+        <p class="mt-5 mb-3 text-muted">© Brand</p>
+
+        <div *ngIf="errorMessage">
+            <p style="color:red"> {{errorMessage}} </p>
+        </div>
+
+    </form>
+
+
+</div>

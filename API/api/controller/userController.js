@@ -1,5 +1,7 @@
 const User = require('../models/userModel');
-
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.signUp = (req, res, next) => {
 
@@ -20,6 +22,8 @@ exports.signUp = (req, res, next) => {
                         const user = new User({
                             _id: new mongoose.Types.ObjectId(),
                             email: req.body.email,
+                            name: req.body.name,
+                            address: req.body.address,
                             password: hash
                         }).save()
                             .then(result => {
